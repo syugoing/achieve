@@ -4,7 +4,6 @@ class BlogsController < ApplicationController
 
   def index
     @blogs = Blog.all
-    binding.pry
   end
 
   def new
@@ -45,6 +44,9 @@ class BlogsController < ApplicationController
     @blog = Blog.find(params[:id])
     @comment = @blog.comments.build
     @comments = @blog.comments
+    if params[:notification_id] != nil then
+      Notification.find(params[:notification_id]).update(read: true)
+    end
   end
 
   def create
