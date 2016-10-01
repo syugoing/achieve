@@ -28,6 +28,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :conversations do
+    resources :messages
+  end
+
   resources :contacts, only: [:new, :create] do
     collection do
       post :contactconfirm
