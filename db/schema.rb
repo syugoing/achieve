@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160930034938) do
+ActiveRecord::Schema.define(version: 20161001015652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,18 @@ ActiveRecord::Schema.define(version: 20160930034938) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
     t.index ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
+  end
+
+  create_table "submit_requests", force: :cascade do |t|
+    t.integer  "task_id"
+    t.integer  "user_id"
+    t.integer  "charge_id",  null: false
+    t.integer  "status"
+    t.text     "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_submit_requests_on_task_id", using: :btree
+    t.index ["user_id"], name: "index_submit_requests_on_user_id", using: :btree
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -95,5 +107,7 @@ ActiveRecord::Schema.define(version: 20160930034938) do
 
   add_foreign_key "comments", "blogs"
   add_foreign_key "comments", "users"
+  add_foreign_key "submit_requests", "tasks"
+  add_foreign_key "submit_requests", "users"
   add_foreign_key "tasks", "users"
 end
