@@ -19,13 +19,13 @@ Rails.application.configure do
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
-  config.action_mailer.default_url_options = { host: 'warm-lowlands-50928.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: '52.43.207.172' }
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings =
   {
    user_name: ENV['SENDGRID_USERNAME'],
    password: ENV['SENDGRID_PASSWORD'],
-   domain: "heroku.com",
+   domain: "AWS",
    address: "smtp.sendgrid.net",
    port: 587,
    authentication: :plain,
